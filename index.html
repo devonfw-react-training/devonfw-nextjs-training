@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>devonfw React on Jamstack</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" href="common/img/favicon.ico" />
+
+    <link rel="stylesheet" href="reveal.js-3.6.0/css/reveal.css" />
+    <link rel="stylesheet" href="reveal.js-3.6.0/css/theme/white.css" />
+    <link rel="stylesheet" href="common/css/common.css" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="reveal.js-3.6.0/lib/css/zenburn.css" />
+
+    <!-- Printing and PDF exports -->
+    <!-- <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script> -->
+    <style>
+      section.agenda ul {
+        list-style: none;
+        margin: 0;
+        color: var(--cap-white);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="devon reveal">
+      <div class="slides">
+        <section
+          data-background-image="common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg"
+        >
+          <div style="display: flex; flex-direction: column">
+            <div
+              style="
+                align-self: flex-end;
+                display: flex;
+                flex-direction: column;
+              "
+            >
+              <img
+                class="no-background no-border no-margin no-shadow react-logo"
+                src="common/img/react-logo.svg"
+              />
+              <h2 class="white">React on Jamstack Training</h2>
+            </div>
+            <div
+              style="
+                align-self: flex-end;
+                display: flex;
+                flex-direction: row;
+                margin-top: 2em;
+              "
+            >
+              <h3 class="white">by&nbsp;</h3>
+              <img
+                height="70em"
+                class="no-background no-border no-margin no-shadow"
+                src="common/img/devon_logo_white.png"
+              />
+              <h3 style="margin-right: 1em" class="white">&nbsp;team</h3>
+            </div>
+          </div>
+        </section>
+        <section
+          data-background-image="common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg"
+        >
+          <h3 class="white" style="text-transform: none">Agenda</h3>
+          <ol class="white">
+            <li>What is Jamstack?</li>
+            <li>Why Jamstack?</li>
+            <li>Next.js</li>
+          </ol>
+        </section>
+        <section
+          data-background-image="common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg"
+        >
+          <h3 class="white" style="text-transform: none">What is Jamstack?</h3>
+          <p class="white" style="text-align: left">
+            Jamstack is an architecture designed to make the web faster, more
+            secure, and easier to scale.
+          </p>
+          <div>
+            <p class="white">The core principles here are:</p>
+            <ul>
+              <li>pre-rendering,</li>
+              <li>and decoupling</li>
+            </ul>
+          </div>
+        </section>
+        <section
+          data-background-image="common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg"
+        >
+          <h3 class="white" style="text-transform: none">Why Jamstack?</h3>
+          <div>
+            <p class="white">
+              A Jamstack architecture can bring all sorts of benefits to the
+              sites:
+            </p>
+            <ul>
+              <li>security</li>
+              <li>scale</li>
+              <li>performance</li>
+              <li>maintainability</li>
+              <li>portability</li>
+              <li>developer experience</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <section
+            data-background-image="common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg"
+          >
+            <h3 class="white" style="text-transform: none">Next.js</h3>
+            <p class="white">
+              Next.js is a minimalistic framework for server-rendered React
+              applications as well as statically exported React apps.
+            </p>
+          </section>
+          <section
+            data-background-image="common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg"
+          >
+            <h3 class="white" style="text-transform: none">Next.js</h3>
+            <div>
+              <p class="white" style="text-align: left">
+                Routing by convention: the
+                <span class="black">file-system is the main API</span>.
+              </p>
+              <p class="white" style="text-align: left">
+                Every .js file within the automatically created pages directory
+                becomes a route that gets automatically processed and rendered.
+              </p>
+            </div>
+          </section>
+          <section
+            data-background-image="common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg"
+          >
+            <h3 class="white" style="text-transform: none">Next.js</h3>
+            <div>
+              <p class="white" style="text-align: left">
+                Pre-rendering can be realized in many different flavours:
+              </p>
+              <ul>
+                <li>server side</li>
+                <li>hybrid static & server rendering</li>
+                <li>incremental static regeneration</li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section
+          data-background-image="common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg"
+        >
+          <h1 class="white" style="text-transform: none">
+            <a href="exercises/index.html">Exercises -&gt;</a>
+          </h1>
+        </section>
+      </div>
+    </div>
+
+    <script src="reveal.js-3.6.0/lib/js/head.min.js"></script>
+    <script src="reveal.js-3.6.0/js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [],
+      });
+    </script>
+  </body>
+</html>
