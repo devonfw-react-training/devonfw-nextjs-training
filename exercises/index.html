@@ -66,7 +66,10 @@
                         Component hydration (1/5)
                     </h3>
                     <ol class="white">
-                        <li>Let's start with a CRA app and transform it to SSR</li>
+                        <li>Let's start with a CRA app and transform it to
+                            SSR</li>
+                        <pre
+                            style="margin: 0"><code class="hljs bash" data-trim>npx create-react-app my-ssr-app</code></pre>
                         <li>
                             Install <code>Express</code> server
                             <pre style="margin: 0"><code class="hljs bash" data-trim>npm install express</code></pre>
@@ -97,18 +100,17 @@
                             pre-rendered markup
                         </li>
                         <li>
-                            Get the content of the ./build/index.html file, and replace the
-                            <code>&lt;div id="root"&gt;&lt;/div&gt;</code> placeholder with
-                            <pre style="margin: 0">
-                    <code class="hljs js" data-trim>
-                    &lt;div id="root"&gt;
-                    ${ReactDOMServer.renderToString(&lt;App /&gt;)} 
-                    &lt;/div&gt;
-                    </code>
-                </pre>
+                            Get the content of the <code>./build/index.html</code> file, and replace the
+                            <code>&lt;div id="root"&gt;&lt;/div&gt;</code> placeholder with usage of
+                            <code>ReactDOMServer.renderToString</code> function
+                            <pre style="margin: 0"><code class="hljs js" data-trim>
+                                &lt;div id="root"&gt;
+                                    ${ReactDOMServer.renderToString(&lt;App /&gt;)} 
+                                &lt;/div&gt;
+                            </code></pre>
                         </li>
                         <li>
-                            All the content inside the build folder is going to be served
+                            Additionally all the content inside the build folder is going to be served
                             statically by Express.
                         </li>
                     </ol>
