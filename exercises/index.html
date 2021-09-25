@@ -56,6 +56,7 @@
                     <li><a href="#/hydration">Component hydration (Vanilla)</a></li>
                     <li><a href="#/pages">Pages (Next.js)</a></li>
                     <li><a href="#/data-fetching">Data fetching (Next.js)</a></li>
+                    <li><a href="#/testing">Testing (Next.js)</a></li>
                 </ol>
             </section>
             <section id="hydration">
@@ -341,7 +342,7 @@
                 <section
                     data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
                     <h3 class="white" style="text-transform: none">
-                        Pages Next.js - summary (7/7)
+                        Pages Next.js - steps (7/7)
                     </h3>
                     <ol class="white">
                         <li>
@@ -369,230 +370,193 @@
                 <section
                     data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
                     <h3 class="white" style="text-transform: none">
-                        Data fetching (1/7)
+                        Data fetching Next.js (1/7)
                     </h3>
                     <ol class="white">
                         <li>
-                            We are going to make the <code>BookDetails</code> component
-                            stateful (again): refactor it to leverage
-                            <code>useState</code> hook; the state is just a book itself.
+                            Let's have our API server running standalone.
                         </li>
                         <li>
-                            Add the <code>onBookChange</code> optional property to the
-                            (existing) <code>Props</code> interface;
-                            <code>onBookChange</code> is a function expecting a book and
-                            returning <code>void</code>:
+                            Checkout the Git project to a different folder, switch to branch
+                            <code>002-ssr-start</code>, install and run the server
+                        </li>
+                        <li>
+                            Install and run the API server
                             <pre style="margin: 0"><code class="hljs typescript" data-trim>
-export interface Props {
-  book: Book;
-  onBookChange?: (book: Book) => void;
-}
-                        </code></pre>
+                                npm install
+                                npm run api     
+                            </code></pre>
+                        </li>
+                        <li>
+                            Check if API is ready on <code>localhost:3001/api/books</code>
+                        </li>
+                        <li>
+                            In your original project switch all API calls to use of the new host:
+                            <code>localhost:3001</code>
                         </li>
                     </ol>
                 </section>
                 <section
                     data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
                     <h3 class="white" style="text-transform: none">
-                        Data Binding (2/7)
+                        Data fetching Next.js (2/7)
                     </h3>
                     <ol class="white">
                         <li>
-                            Initialize the state with the values coming from the
-                            <code>book</code> property:
+                            Move the client side call form a book detail page to be server side only.
+                            Use <a
+                                href="https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering">getServerSideProps</a>
+                            to achieve that.
+                        </li>
+                        <li>
+                            The core implementation can look like that:
                             <pre style="margin: 0"><code class="hljs typescript" data-trim>
-export const BookDetails: FunctionComponent&lt;Props&gt; = (props) => {
-  const [book, setBook] = useState&lt;Book&gt;({...props.book}};
-}
-                        </code></pre>
-                        </li>
-                        <li>
-                            Go to the <code>render()</code> function and replace the
-                            <code>&lt;p&gt;</code> elements with
-                            <code>&lt;input&gt;</code> ones, e.g.:
-                            <pre style="margin: 0"><code class="hljs typescript" data-trim>
-  return (
-    &lt;input id="authors"
-           type="text"
-           className="form-control"
-           value={book.authors}
-           onChange={updateAuthorsValue}
-    /&gt;);
-                        </code></pre>
-                        </li>
-                    </ol>
-                </section>
-                <section
-                    data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
-                    <h3 class="white" style="text-transform: none">
-                        Data Binding (3/7)
-                    </h3>
-                    <ol class="white">
-                        <li>
-                            The <code>&lt;input&gt;</code>'s <code>value</code> property is
-                            now bound to the state (1st direction) and any change on the
-                            <code>&lt;input&gt;</code> is handled by the
-                            <code>updateAuthorsValue</code> class bound function which is
-                            going to update the state (2nd direction).
-                        </li>
-                        <li>
-                            For <code>updateAuthorsValue</code> to be implemented we need a
-                            helper function:
-                            <pre style="margin: 0"><code class="hljs typescript" data-trim>
-function getValueFromInputChangeEvent(event: SyntheticEvent) {
-  const inputElement = event.target as HTMLInputElement;
-  return inputElement.value;
-}
-                        </code></pre>
-                        </li>
-                    </ol>
-                </section>
-                <section
-                    data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
-                    <h3 class="white" style="text-transform: none">
-                        Data Binding (4/7)
-                    </h3>
-                    <ol class="white">
-                        <li>
-                            Implement the <code>updateAuthorsValue</code> function:
-                            <pre style="margin: 0"><code class="hljs typescript" data-trim>
-function updateAuthorsValue = (event: SyntheticEvent) => {
-  // use getValueFromInputChangeEvent to get the new value
-  // update the state with the new value
-}
-                        </code></pre>
-                        </li>
-                        <li>
-                            Similarly, implement the <code>updateTitleValue</code> handler.
-                        </li>
-                        <li>
-                            Add a
-                            <a href="https://getbootstrap.com/docs/4.1/components/buttons/#examples"
-                                target="_blank">Bootstrap's primary button</a>
-                            (of type <code>'submit'</code>) to the form, just under the
-                            fields.
-                        </li>
-                    </ol>
-                </section>
-                <section
-                    data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
-                    <h3 class="white" style="text-transform: none">
-                        Data Binding (5/7)
-                    </h3>
-                    <ol class="white">
-                        <li>
-                            Handle the <code>&lt;form&gt;</code>'s <code>submit</code> event
-                            in the <code>notifyOnBookChange</code> function:
-                            <pre style="margin: 0"><code class="hljs typescript" data-trim>
-function notifyOnBookChange = (event: SyntheticEvent) => {
-  // prevent the default submit event's behavior
-  // call back the props.onBookChange (if any)
-  // passing it a copy of the current state
-}
+                                const getServerSideProps: GetServerSideProps = async function (context) {
+                                    const { id } = context.query;
+                                    const book = await booksService.findOne(Number.parseInt(id as string));
+                                    return {
+                                      props: { book },
+                                    };
+                                  };
+                                  
+                                export { getServerSideProps };
+                            </code></pre>
 
-  return (
-    &lt;form onSubmit={notifyOnBookChange}&gt;
-  );
-                        </code></pre>
-                        </li>
-                        <li>
-                            Implement new test cases and make the existing ones pass :)
                         </li>
                     </ol>
                 </section>
                 <section
                     data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
                     <h3 class="white" style="text-transform: none">
-                        Data Binding (6/7)
+                        Data fetching Next.js (3/7)
                     </h3>
                     <ol class="white">
                         <li>
-                            Go to the <code>BookOverview</code> component. After changes we
-                            have just made, only the first click on a row renders its
-                            details. The subsequent clicks don't update the details :(
+                            Now let's have our books index page rendered statically during build of the server. Use
+                            <a
+                                href="https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation">getStaticProps</a>
+                            to achieve that.
                         </li>
                         <li>
-                            To fix this, add the <code>key</code> property (setting it to
-                            the book's ID) to the <code>&lt;BookDetails&gt;</code> element;
-                            <a href="https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key"
-                                target="_blank">here</a>
-                            you can learn why it helps.
-                        </li>
-                    </ol>
-                </section>
-                <section
-                    data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
-                    <h3 class="white" style="text-transform: none">
-                        Data Binding (7/7)
-                    </h3>
-                    <ol class="white">
-                        <li>
-                            Implement the <code>updateBook</code> arrow function:
+                            The special function has to be returned from page, so we need to refactor
+                            BookContainer component to accept books as props and fetch them first from API
                             <pre style="margin: 0"><code class="hljs typescript" data-trim>
-updateBook = (bookToUpdate: Book) => {
-  setBooks(
-    // update the books: apply the map method to
-    // books replacing the current book with the
-    // bookToUpdate if their IDs are equal
-  );
-}
+                                export interface Props {
+                                    books: Book[];
+                                  }                                
+                                export const BookOverviewContainer: FC&lt;Props&gt; = ({ books }) => {
+                                return &lt;BookOverview books={books} /&gt;;
+                                };
+                            </code></pre>
+                        </li>
+                    </ol>
+                </section>
+                <section
+                    data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
+                    <h3 class="white" style="text-transform: none">
+                        Data fetching Next.js (4/7)
+                    </h3>
+                    <ol class="white">
+                        <li>
+                            Now declare the GetStaticProps in the <code>/pages/books/index.tsx</code> page
+                            <pre style="margin: 0"><code class="hljs typescript" data-trim>
+                            export const getStaticProps: GetStaticProps = async function () {
+                                const books = await booksService.findAll();
+                                return { props: { books } };
+                            };
+                            </code></pre>
+                        </li>
+                        <li>
+                            Build the server (production version) and check if the results are as expected
+                            <img src="img/build_result.png" />
+                        </li>
+                    </ol>
+                </section>
+                <section
+                    data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
+                    <h3 class="white" style="text-transform: none">
+                        Data fetching Next.js (5/7)
+                    </h3>
+                    <ol class="white">
+                        <li>
+                            It's time to make the solution great again. Use the <a
+                                href="https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration">revalidate</a>
+                            to refresh static page periodically on the server!
+                        </li>
+                        <li>
+                            Change getStaticProps in the <code>books</code> page to leverage use of ISR
+                            <pre style="margin: 0"><code class="hljs typescript" data-trim>
+                                export const getStaticProps: GetStaticProps = async function () {
+                                    const books = await booksService.findAll();
+                                    return { props: { books }, revalidate: 30 };
+                                };
                         </code></pre>
                         </li>
                         <li>
-                            Implement new test cases and make the existing ones pass :)
+                            Build the server (production version) and check if the results are as expected
+                            <img src="img/build_result_isr.png" />
+                        </li>
+                    </ol>
+                </section>
+                <section
+                    data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
+                    <h3 class="white" style="text-transform: none">
+                        Data fetching Next.js - summary (6/7)
+                    </h3>
+                    <ol class="white">
+                        <li>
+                            <code>useEffect</code> (Client-side Rendering): Fetch data from the browser.
+                        </li>
+                        <li>
+                            <code>getServerSideProps</code> (Server-side Rendering): Fetch data on each request.
+                        </li>
+                        <li>
+                            <code>getStaticProps</code> (Static Generation): Fetch data at build time.
+                        </li>
+                        <li>
+                            <code>getStaticProps</code> with <code>revalidate</code> (Incremental Static Generation):
+                            Fetch data at build time, then periodically refresh at run time.
+                        </li>
+                        <li>
+                            <code>getStaticPaths*</code> (Static Generation): Specify dynamic routes to pre-render
+                            pages.
+                        </li>
+                    </ol>
+                </section>
+                <section
+                    data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
+                    <h3 class="white" style="text-transform: none">
+                        Data fetching - steps (7/7)
+                    </h3>
+                    <ol class="white">
+                        <li>
+                            02-ssr-start
+                        </li>
+                        <li>
+                            02-ssr-getServerSideProps
+                        </li>
+                        <li>
+                            02-ssr-getStaticProps
+                        </li>
+                        <li>
+                            02-ssr-isr
                         </li>
                     </ol>
                 </section>
             </section>
-            <section id="service">
+            <section id="testing">
                 <section
                     data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
-                    <h3 class="white" style="text-transform: none">Service (1/2)</h3>
+                    <h3 class="white" style="text-transform: none">Testing</h3>
                     <ol class="white">
                         <li>
-                            Create a new class <code>BookService</code> in
-                            <pre
-                                style="margin: 0"><code class="hljs bash" data-trim>book/services/BookService.ts</code></pre>
+                            Write tests for pages
                         </li>
                         <li>
-                            <code>BookService</code> keeps a list of books (like in the
-                            <code>BookOverview</code>) and exposes the following API:
-                            <pre style="margin: 0"><code class="hljs typescript" data-trim>
-export class BookService {
-  findAll(): Promise&lt;Book[]&gt; {}
-
-  findOne(id: number): Promise&lt;Book&gt; {}
-
-  save(bookToSave: Book | BookProperties): Promise&lt;Book&gt; {}
-}
-                        </code></pre>
+                            Write tests for API
                         </li>
                         <li>
-                            Implement the service and add test cases in:
-                            <pre
-                                style="margin: 0"><code class="hljs bash" data-trim>book/services/BookService.test.ts</code></pre>
-                        </li>
-                    </ol>
-                </section>
-                <section
-                    data-background-image="../common/img/shapes/Fixed_Shape_3_SVG/Fixed_Shape_3_CapgeminiBlue_RGB.svg">
-                    <h3 class="white" style="text-transform: none">Service (2/2)</h3>
-                    <ol class="white">
-                        <li>
-                            Go to the <code>BookOverview</code> component. Add the
-                            <code>bookService</code> property (of the
-                            <code>BookService</code> type) to the
-                            <code>Props</code> interface.
-                        </li>
-                        <li>
-                            Call the <code>bookService.findAll()</code> method to set the
-                            state's books in the <code>componentDidMount()</code> lifecycle
-                            method. Don't forget to make tests pass :)
-                        </li>
-                        <li>
-                            Go to the <code>App</code> component and set the
-                            <code>BookOverview</code>'s <code>bookService</code> property to
-                            a new <code>BookService</code> instance.
+                            Write tests for SSR/SSG/ISR functions
                         </li>
                     </ol>
                 </section>
